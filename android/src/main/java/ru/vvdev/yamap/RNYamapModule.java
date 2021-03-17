@@ -13,8 +13,8 @@ import com.yandex.mapkit.transport.TransportFactory;
 import com.yandex.runtime.Error;
 import com.yandex.runtime.i18n.I18nManagerFactory;
 import com.yandex.runtime.i18n.LocaleListener;
-import com.yandex.runtime.i18n.LocaleResetListener;
-import com.yandex.runtime.i18n.LocaleUpdateListener;
+//import com.yandex.runtime.i18n.LocaleResetListener;
+//import com.yandex.runtime.i18n.LocaleUpdateListener;
 
 import java.util.HashMap;
 import java.util.Map;
