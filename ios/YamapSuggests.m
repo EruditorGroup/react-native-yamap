@@ -5,7 +5,6 @@
 @implementation YamapSuggests {
     YMKSearchManager *searchManager;
     YMKSearchSuggestSession *suggestClient;
-    YMKSuggestItem* kek;
 }
 
 -(id)init {
