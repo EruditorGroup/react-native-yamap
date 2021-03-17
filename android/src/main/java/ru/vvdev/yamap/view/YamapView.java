@@ -305,18 +305,18 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
     }
 
     public void setShowUserPosition(Boolean show) {
-        if (userLocationLayer == null) {
-            userLocationLayer = getMap().getUserLocationLayer();
-        }
-        if (show) {
-            userLocationLayer.setObjectListener(this);
-            userLocationLayer.setVisible(true);
-            userLocationLayer.setHeadingEnabled(true);
-        } else {
-            userLocationLayer.setVisible(false);
-            userLocationLayer.setHeadingEnabled(false);
-            userLocationLayer.setObjectListener(null);
-        }
+//        if (userLocationLayer == null) {
+//            userLocationLayer = getMap().getUserLocationLayer();
+//        }
+//        if (show) {
+//            userLocationLayer.setObjectListener(this);
+//            userLocationLayer.setVisible(true);
+//            userLocationLayer.setHeadingEnabled(true);
+//        } else {
+//            userLocationLayer.setVisible(false);
+//            userLocationLayer.setHeadingEnabled(false);
+//            userLocationLayer.setObjectListener(null);
+//        }
     }
 
     private WritableMap convertRouteSection(Route route, final Section section, Polyline geometry, Weight routeWeight, int routeIndex) {
