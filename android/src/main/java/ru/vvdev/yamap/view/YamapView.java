@@ -14,6 +14,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableNativeArray;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.yandex.mapkit.Animation;
+import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.RequestPoint;
 import com.yandex.mapkit.RequestPointType;
 import com.yandex.mapkit.directions.DirectionsFactory;
@@ -37,7 +38,6 @@ import com.yandex.mapkit.map.PlacemarkMapObject;
 import com.yandex.mapkit.map.PolygonMapObject;
 import com.yandex.mapkit.map.PolylineMapObject;
 import com.yandex.mapkit.mapview.MapView;
-import com.yandex.mapkit.search.DrivingArrivalPoint;
 import com.yandex.mapkit.transport.TransportFactory;
 import com.yandex.mapkit.transport.masstransit.MasstransitOptions;
 import com.yandex.mapkit.transport.masstransit.MasstransitRouter;
@@ -305,18 +305,18 @@ public class YamapView extends MapView implements UserLocationObjectListener, Ca
     }
 
     public void setShowUserPosition(Boolean show) {
-//        if (userLocationLayer == null) {
-//            userLocationLayer = getMap().getUserLocationLayer();
-//        }
-//        if (show) {
-//            userLocationLayer.setObjectListener(this);
-//            userLocationLayer.setVisible(true);
-//            userLocationLayer.setHeadingEnabled(true);
-//        } else {
-//            userLocationLayer.setVisible(false);
-//            userLocationLayer.setHeadingEnabled(false);
-//            userLocationLayer.setObjectListener(null);
-//        }
+        if (userLocationLayer == null) {
+            userLocationLayer = MapKitFactory.getInstance().createUserLocationLayer(getMapWindow());
+        }
+        if (show) {
+            userLocationLayer.setObjectListener(this);
+            userLocationLayer.setVisible(true);
+            userLocationLayer.setHeadingEnabled(true);
+        } else {
+            userLocationLayer.setVisible(false);
+            userLocationLayer.setHeadingEnabled(false);
+            userLocationLayer.setObjectListener(null);
+        }
     }
 
     private WritableMap convertRouteSection(Route route, final Section section, Polyline geometry, Weight routeWeight, int routeIndex) {
