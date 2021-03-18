@@ -9,13 +9,13 @@ export type YamapSuggest = {
 };
 
 type OptionalYamapCoords = {
-  lon?: string;
-  lat?: string;
+  lon?: number;
+  lat?: number;
 };
 
 export type YamapCoords = {
-  lon: string;
-  lat: string;
+  lon: number;
+  lat: number;
 };
 export type YamapSuggestWithCoords = YamapSuggest & OptionalYamapCoords;
 
@@ -41,12 +41,13 @@ const getCoordsFromSuggest: LatLonGetter = (suggest) => {
   const coords = suggest.uri
     ?.split("?")[1]
     ?.split("&")
-    .find((param) => param.startsWith("ll"))
+    ?.find((param) => param.startsWith("ll"))
     ?.split("=")[1];
   if (!coords) return;
 
-  const lon = coords.split("%2C")[0];
-  const lat = coords.split("%2C")[1];
+  const splittedCoords = coords.split("%2C");
+  const lon = Number(splittedCoords[0]);
+  const lat = Number(splittedCoords[1]);
   return { lat, lon };
 };
 
