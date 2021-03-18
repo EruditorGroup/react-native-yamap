@@ -3,12 +3,21 @@
 @import YandexMapsMobile;
 
 @implementation YamapSuggests {
-    YMKSearchManager *searchManager;
-    YMKSearchSuggestSession *suggestClient;
+    YMKSearchManager* searchManager;
+    YMKSearchSuggestSession* suggestClient;
+    YMKBoundingBox* defaultBoundingBox;
+    YMKSuggestOptions* suggestOptions;
 }
 
 -(id)init {
     self = [super init];
+    
+    YMKPoint* southWestPoint = [YMKPoint pointWithLatitude:-90.0 longitude:-180.0];
+    YMKPoint* northEastPoint = [YMKPoint pointWithLatitude:90.0 longitude:180.0];
+    defaultBoundingBox = [YMKBoundingBox boundingBoxWithSouthWest:southWestPoint northEast:northEastPoint];
+    suggestOptions = [YMKSuggestOptions suggestOptionsWithSuggestTypes: YMKSuggestTypeGeo
+                                                                             userPosition:nil
+                                                                             suggestWords:true];
     
     searchManager = [[YMKSearch sharedInstance] createSearchManagerWithSearchManagerType:YMKSearchSearchManagerTypeOnline];
     
@@ -28,6 +37,9 @@ void runOnMainQueueWithoutDeadlocking(void (^block)(void))
     }
 }
 
+NSString* ERR_NO_REQUEST_ARG = @"YANDEX_SUGGEST_ERR_NO_REQUEST_ARG";
+NSString* ERR_SUGGEST_FAILED = @"YANDEX_SUGGEST_ERR_SUGGEST_FAILED";
+
 -(YMKSearchSuggestSession*_Nonnull) getSuggestClient {
     if (suggestClient) {
         return suggestClient;
@@ -44,20 +56,13 @@ RCT_EXPORT_METHOD(suggest:(nonnull NSString*) searchQuery
     @try {
         YMKSearchSuggestSession* session = [self getSuggestClient];
         
-        YMKPoint* southWestPoint = [YMKPoint pointWithLatitude:-90.0 longitude:-180.0];
-        YMKPoint* northEastPoint = [YMKPoint pointWithLatitude:90.0 longitude:180.0];
-        YMKBoundingBox* defaultBoundingBox = [YMKBoundingBox boundingBoxWithSouthWest:southWestPoint northEast:northEastPoint];
-        YMKSuggestOptions* suggestOptions = [YMKSuggestOptions suggestOptionsWithSuggestTypes: YMKSuggestTypeGeo
-                                                                                 userPosition:nil
-                                                                                 suggestWords:true];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
             [session suggestWithText:searchQuery
-                              window:defaultBoundingBox
-                      suggestOptions:suggestOptions
+                              window:self->defaultBoundingBox
+                      suggestOptions:self->suggestOptions
                      responseHandler:^(NSArray<YMKSuggestItem *> * _Nullable suggestList, NSError * _Nullable error){
                 if (error) {
-                    reject(@"FATAL_ERROR", @"Error during suggest processing", error);
+                    reject(ERR_SUGGEST_FAILED, [NSString stringWithFormat:@"search request: %@", searchQuery], error);
                     return;
                 }
                 
@@ -77,7 +82,7 @@ RCT_EXPORT_METHOD(suggest:(nonnull NSString*) searchQuery
         });
     }
     @catch ( NSException *error ) {
-        reject(@"FATAL_ERROR", @"Error during suggest recieving", nil);
+        reject(ERR_NO_REQUEST_ARG, [NSString stringWithFormat:@"search request: %@", searchQuery], nil);
     }
 })
 
