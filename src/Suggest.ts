@@ -7,17 +7,11 @@ export type YamapSuggest = {
   subtitle?: string;
   uri?: string;
 };
-
-type OptionalYamapCoords = {
-  lon?: number;
-  lat?: number;
-};
-
 export type YamapCoords = {
   lon: number;
   lat: number;
 };
-export type YamapSuggestWithCoords = YamapSuggest & OptionalYamapCoords;
+export type YamapSuggestWithCoords = YamapSuggest & Partial<YamapCoords>;
 
 type SuggestFetcher = (query: string) => Promise<Array<YamapSuggest>>;
 const suggest: SuggestFetcher = (query) => YamapSuggests.suggest(query);
