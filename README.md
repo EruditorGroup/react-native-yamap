@@ -36,7 +36,7 @@ YaMap.init('API_KEY');
 Рекомендуется инициализировать MapKit в функции `didFinishLaunchingWithOptions` в AppDelegate.m
 
 ```
-#import <YandexMapKit/YMKMapKitFactory.h>
+#import <YandexMapsMobile/YMKMapKitFactory.h>
 
 ...
 
@@ -377,3 +377,16 @@ Geocoder.addressToGeo(address: string);
 [yandex-geo-doc]: https://tech.yandex.ru/maps/geocoder/doc/desc/concepts/input_params-docpage
 
 [yandex-geo-response]: https://tech.yandex.ru/maps/geocoder/doc/desc/reference/response_structure-docpage/
+
+
+## Поиск по гео с подсказсками (GeoSuggestions)
+
+```typescript
+import {Suggest} from 'react-native-yamap';
+
+// FK TODO: добавить пример
+```
+
+## Миграция с версии 1.0.x -> 1.1.x
+
+FK TODO: добавить описание про изменение нативной зависимсоти
