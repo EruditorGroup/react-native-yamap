@@ -205,7 +205,7 @@ public class YamapViewManager extends ViewGroupManager<YamapView> {
     }
 
     @ReactProp(name = "zoomGesturesEnabled")
-    public void setRotateGesturesEnabled(View view, Boolean zoomGesturesEnabled) {
+    public void setZoomGesturesEnabled(View view, Boolean zoomGesturesEnabled) {
         castToYaMapView(view).setZoomGesturesEnabled(zoomGesturesEnabled != null ? zoomGesturesEnabled : true);
     }
 
