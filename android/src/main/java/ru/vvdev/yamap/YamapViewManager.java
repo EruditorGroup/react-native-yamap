@@ -196,22 +196,22 @@ public class YamapViewManager extends ViewGroupManager<YamapView> {
 
     @ReactProp(name = "scrollGesturesEnabled")
     public void setScrollGesturesEnabled(View view, Boolean scrollGesturesEnabled) {
-        castToYaMapView(view).setScrollGesturesEnabled(scrollGesturesEnabled != null ? scrollGesturesEnabled : true);
+        castToYaMapView(view).setScrollGesturesEnabled(scrollGesturesEnabled == true);
     }
 
     @ReactProp(name = "rotateGesturesEnabled")
     public void setRotateGesturesEnabled(View view, Boolean rotateGesturesEnabled) {
-        castToYaMapView(view).setRotateGesturesEnabled(rotateGesturesEnabled != null ? rotateGesturesEnabled : true);
+        castToYaMapView(view).setRotateGesturesEnabled(rotateGesturesEnabled == true);
     }
 
     @ReactProp(name = "zoomGesturesEnabled")
     public void setZoomGesturesEnabled(View view, Boolean zoomGesturesEnabled) {
-        castToYaMapView(view).setZoomGesturesEnabled(zoomGesturesEnabled != null ? zoomGesturesEnabled : true);
+        castToYaMapView(view).setZoomGesturesEnabled(zoomGesturesEnabled == true);
     }
 
     @ReactProp(name = "tiltGesturesEnabled")
     public void setTiltGesturesEnabled(View view, Boolean tiltGesturesEnabled) {
-        castToYaMapView(view).setTiltGesturesEnabled(tiltGesturesEnabled != null ? tiltGesturesEnabled : true);
+        castToYaMapView(view).setTiltGesturesEnabled(tiltGesturesEnabled == true);
     }
 
     @ReactProp(name = "mapStyle")
