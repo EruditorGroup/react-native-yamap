@@ -27,8 +27,15 @@ static NSString * _selectedMarkerIcon;
     return dispatch_get_main_queue();
 }
 
-RCT_EXPORT_METHOD(init: (NSString *) apiKey) {
-    [self initWithKey: apiKey];
+RCT_EXPORT_METHOD(init: (NSString *) apiKey
+              resolver:(RCTPromiseResolveBlock)resolve
+              rejecter:(RCTPromiseRejectBlock)reject) {
+    @try {
+        [self initWithKey: apiKey];
+        resolve(nil);
+    } @catch(id anException) {
+        reject(@"ERROR", @"Error with initiating YMKMapKit.", nil);
+    }
 }
 
 RCT_EXPORT_METHOD(setLocale: (NSString *) locale successCallback:(RCTResponseSenderBlock)successCb errorCallback:(RCTResponseSenderBlock) errorCb) {
