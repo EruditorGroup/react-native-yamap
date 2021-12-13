@@ -33,8 +33,12 @@ RCT_EXPORT_METHOD(init: (NSString *) apiKey
     @try {
         [self initWithKey: apiKey];
         resolve(nil);
-    } @catch(id anException) {
-        reject(@"ERROR", @"Error with initiating YMKMapKit.", nil);
+    } @catch (NSException *exception) {
+        NSError *error = nil; 
+        if (exception.userInfo.count > 0) {
+            error = [NSError errorWithDomain:NSCocoaErrorDomain code:0 userInfo:exception.userInfo];
+        } 
+        rejecter(exception.name, exception.reason ?: @"Error initiating YMKMapKit", error);
     }
 }
 
