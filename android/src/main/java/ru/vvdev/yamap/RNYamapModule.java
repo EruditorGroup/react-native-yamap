@@ -67,6 +67,7 @@ public class RNYamapModule extends ReactContextBaseJavaModule {
                 } catch (Error error) {
                     if(apiKeyError != null) {
                         promise.reject(apiKeyError);
+                        return;
                     }
                     promise.reject(error);
                 }
