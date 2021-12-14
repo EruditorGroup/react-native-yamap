@@ -50,14 +50,14 @@ public class RNYamapModule extends ReactContextBaseJavaModule {
         runOnUiThread(new Thread(new Runnable() {
             @Override
             public void run() {
-                Exception apiKeyException = null;
+                Throwable apiKeyException = null;
                 try {
                     // In case when android application reloads during development
                     // MapKitFactory is already initialized
                     // And setting api key leads to crash
                     try {
                         MapKitFactory.setApiKey(apiKey);
-                    } catch (Exception exception) {
+                    } catch (Throwable exception) {
                         apiKeyException = exception;
                     }
                     MapKitFactory.initialize(reactContext);
