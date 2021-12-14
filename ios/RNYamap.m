@@ -38,7 +38,7 @@ RCT_EXPORT_METHOD(init: (NSString *) apiKey
         if (exception.userInfo.count > 0) {
             error = [NSError errorWithDomain:NSCocoaErrorDomain code:0 userInfo:exception.userInfo];
         } 
-        rejecter(exception.name, exception.reason ?: @"Error initiating YMKMapKit", error);
+        reject(exception.name, exception.reason ?: @"Error initiating YMKMapKit", error);
     }
 }
 
