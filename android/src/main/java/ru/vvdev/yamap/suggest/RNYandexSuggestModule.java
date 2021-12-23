@@ -60,11 +60,12 @@ public class RNYandexSuggestModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    void reset() {
+    void reset(final Callback successCb, final Callback errorCb) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 getSuggestClient(getReactApplicationContext()).resetSuggest();
+                successCb.invoke(null);
             }
         });
     }

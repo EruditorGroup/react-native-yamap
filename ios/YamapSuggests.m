@@ -86,17 +86,16 @@ RCT_EXPORT_METHOD(suggest:(nonnull NSString*) searchQuery
     }
 })
 
-RCT_EXPORT_METHOD(reset: (NSString*) ususedParam
-                      resolver:(RCTPromiseResolveBlock) resolve
-                      rejecter:(RCTPromiseRejectBlock) reject {
+RCT_EXPORT_METHOD(reset:(RCTResponseSenderBlock) successCb 
+          errorCallback:(RCTResponseSenderBlock) errorCb {
     @try {
         if (suggestClient) {
             [suggestClient reset];
         }
-        resolve(@[]);
+        successCb(@[]);
     }
     @catch( NSException *error ) {
-        reject(@"ERROR", @"Error during reset suggestions", nil);
+        errorCb(@"ERROR", @"Error during reset suggestions", nil);
     }
 })
 
