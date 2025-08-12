@@ -685,7 +685,9 @@ open class YamapView(context: Context?) : MapView(context), UserLocationObjectLi
         val wTransports = Arguments.createMap()
 
         for ((key, value) in transports) {
-            wTransports.putArray(key, Arguments.fromList(value))
+            if (value != null) {
+                wTransports.putArray(key, Arguments.fromList(value))
+            }
         }
 
         routeMetadata.putMap("transports", wTransports)
